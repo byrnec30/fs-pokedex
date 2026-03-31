@@ -36,10 +36,9 @@ module.exports = [
     }
   },
   {
-    files: ['src/**/*.{js,jsx}', 'test/**/*.{js,jsx}'],
+    files: ['src/**/*.{js,jsx}'],
     plugins: {
       react,
-      jest
     },
     languageOptions: {
       ecmaVersion: 2018,
@@ -51,8 +50,7 @@ module.exports = [
       },
       globals: {
         ...globals.browser,
-        ...globals.es6,
-        ...globals.jest
+        ...globals.es6
       }
     },
     settings: {
@@ -70,7 +68,47 @@ module.exports = [
       'no-trailing-spaces': 'error',
       'object-curly-spacing': ['error', 'always'],
       'arrow-spacing': ['error', { 'before': true, 'after': true }],
-      'no-console': 'error',
+      'no-console': 'off',
+      'react/prop-types': 0
+    }
+  },
+  {
+    files: ['test/**/*.{js,jsx}', 'jest.setup.js'],
+    plugins: {
+      react,
+      jest
+    },
+    languageOptions: {
+      ecmaVersion: 2018,
+      sourceType: 'module',
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        }
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.es6,
+        ...globals.jest,
+        ...globals.node
+      }
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    },
+    rules: {
+      ...react.configs.recommended.rules,
+      'indent': ['error', 2],
+      'linebreak-style': ['error', 'unix'],
+      'quotes': ['error', 'single'],
+      'semi': ['error', 'never'],
+      'eqeqeq': 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': ['error', 'always'],
+      'arrow-spacing': ['error', { 'before': true, 'after': true }],
+      'no-console': 'off',
       'react/prop-types': 0
     }
   }
