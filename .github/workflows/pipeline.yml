@@ -19,8 +19,10 @@ jobs:
           node-version: '24'
       - name: Install dependencies
         run: |
-          npm config set registry https://registry.npmjs.org/
-          npm config set always-auth false
+          cat > "$RUNNER_TEMP/.npmrc" <<'EOF'
+          registry=https://registry.npmjs.org/
+          EOF
+          export NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/.npmrc"
           npm config delete //registry.npmjs.org/:_authToken || true
           npm install
       - name: Check style
