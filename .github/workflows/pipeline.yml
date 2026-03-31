@@ -18,6 +18,10 @@ jobs:
         with:
           node-version: '24'
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm config set registry https://registry.npmjs.org/
+          npm config set always-auth false
+          npm config delete //registry.npmjs.org/:_authToken || true
+          npm install
       - name: Check style
         run: npm run eslint
